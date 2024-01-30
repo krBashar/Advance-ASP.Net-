@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Personal";
+}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd; /* Add this line for column separation */
+        }
+
+            th:last-child,
+            td:last-child {
+                border-right: none; /* Remove border for the last column */
+            }
+    </style>
+</head>
+<body>
+
+    <br />
+    <a href="/home/education">Education</a>
+    <br />
+    <a href="/home/info">Information</a>
+    <br />
+    <a href="/home/project">Projects</a>
+    <br />
+    <a href="/home/reference">References</a>
+    <br />
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>Tamim Iqbal</td>
+        </tr>
+        <tr>
+            <th>DOB</th>
+            <td>01-10-2003</td>
+        </tr>
+        <tr>
+            <th>Father's Name</th>
+            <td>Shakib Al Hasan</td>
+        </tr>
+        <tr>
+            <th>Mother's Name</th>
+            <td>Mushfiqur Rahima</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>Bashundhara, Dhaka</td>
+        </tr>
+        <tr>
+            <th>Blood Group</th>
+            <td>B-</td>
+        </tr>
+    </table>
+
+</body>
+</html>
