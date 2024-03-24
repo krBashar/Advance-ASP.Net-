@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Zero_HungerModelStoreContainer" CdmEntityContainer="Zero_HungerEntities">
+    <EntitySetMapping Name="distributions">
+      <EntityTypeMapping TypeName="Zero_HungerModel.distribution">
+        <MappingFragment StoreEntitySet="distributions">
+          <ScalarProperty Name="did" ColumnName="did" />
+          <ScalarProperty Name="oid" ColumnName="oid" />
+          <ScalarProperty Name="eid" ColumnName="eid" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orders">
+      <EntityTypeMapping TypeName="Zero_HungerModel.order">
+        <MappingFragment StoreEntitySet="orders">
+          <ScalarProperty Name="oid" ColumnName="oid" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="maxtime" ColumnName="maxtime" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="Zero_HungerModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="district" ColumnName="district" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Zero_Hunger.EF.order>
+
+@{
+    ViewBag.Title = "RequestList";
+}
+
+<div class="d-flex justify-content-end mt-3">
+    <a href="../Admin/DonationHistory" class="btn btn-success">
+        Donation History
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header bg-dark text-light text-center p-2">
+        <h3 class="m-0">Donation Request List</h3>
+    </div>
+
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Donation No</th>
+                    <th>Quantity</th>
+                    <th>Expired Time</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Select((value, index) => new { Value = value, Index = index + 1 }))
+                {
+                    <tr>
+                        <td>@item.Index</td>
+                        <td>@Html.DisplayFor(modelItem => item.Value.quantity)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Value.maxtime)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Value.address)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Value.status)</td>
+
+                        <td>
+                            @if (item.Value.status == "pending")
+                            {
+                                <div>
+                                    <form action="/Admin/UpdateOrderStatus" method="post">
+                                        <input type="hidden" name="oid" value="@item.Value.oid" />
+                                        <button type="submit" name="status" value="Accepted" class="btn btn-success">Accept</button>
+                                        <button type="submit" name="status" value="Rejected" class="btn btn-danger">Reject</button>
+                                    </form>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center mt-3">
+    <a href="../Admin/AssignCollector" class="btn btn-primary">
+        Assign Collector
+    </a>
+</div>

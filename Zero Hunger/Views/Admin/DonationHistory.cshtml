@@ -1,0 +1,46 @@
+﻿@model Zero_Hunger.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "All Accepted Donations";
+}
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-dark text-light">
+            <h4 class="text-center mb-0">All Accepted Donations</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Donation No</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Expired Time</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var distribution in Model.Distributions.Select((value, index) => new { Value = value, Index = index + 1 }))
+                        {
+                            var order = Model.Orders.FirstOrDefault(o => o.oid == distribution.Value.oid);
+                            if (order != null)
+                            {
+                                <tr>
+                                    <td>@distribution.Index</td>
+                                    <td>@order.quantity</td>
+                                    <td>@order.maxtime</td>
+                                    <td>@order.address</td>
+                                    <td>@distribution.Value.status</td>
+                                    <td></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿<div class="card-header text-center">
+    <h4>Donation History</h4>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>Quantity</th>
+                <th>Address</th>
+                <th>Max Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Model[i].quantity</td>
+                    <td>@Model[i].address</td>
+                    <td>@Model[i].maxtime</td>
+                    <td>@Model[i].status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center mt-3">
+    <a href="../Restaurant/newDonation" class="btn btn-primary">
+        New Donation
+    </a>
+</div>

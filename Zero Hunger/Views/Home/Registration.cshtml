@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Registration";
+}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-white" style="background-color: #8B4513;">
+                <div class="card-header text-center">
+                    <h4>Registration</h4>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST">
+                        <div class="form-group row">
+                            <label for="Name" class="col-sm-3 col-form-label text-center">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" name="Name" placeholder="Enter your name" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="Email" class="col-sm-3 col-form-label text-center">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="email" name="Email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="Password" class="col-sm-3 col-form-label text-center">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="password" name="Password" placeholder="Enter your password" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="type" class="col-sm-3 col-form-label text-center">User Type</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="type" name="type">
+                                    <option value="employee">Employee</option>
+                                    <option value="restaurant">Restaurant</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="district" class="col-sm-3 col-form-label text-center">District</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="district" name="district">
+                                    <option value="chittagong">Chittagong</option>
+                                    <option value="dhaka">Dhaka</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

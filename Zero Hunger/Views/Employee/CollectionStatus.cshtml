@@ -1,0 +1,49 @@
+﻿
+@model Zero_Hunger.Models.OrderViewModel
+@using Zero_Hunger.EF;
+
+@{
+    ViewBag.Title = "Collection Status";
+    var user = Session["User"] as user;
+    int userId = user.uid;
+}
+
+<div class="card-header text-center"><h2>Assigned Donations for Collection</h2></div>
+<br>
+
+<table class="table">
+    <tr>
+        <th>Donation No</th>
+        <th>Quantity</th>
+        <th>Expired Time</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+
+    @foreach (var order in Model.Orders.Select((value, index) => new { Value = value, Index = index + 1 }))
+    {
+        var distribution = Model.Distributions.FirstOrDefault(d => d.oid == order.Value.oid && d.eid == userId);
+        if (distribution != null && distribution.status == "pending")
+        {
+            <tr>
+                <td>@order.Index</td>
+                <td>@order.Value.quantity</td>
+                <td>@order.Value.maxtime</td>
+                <td>@order.Value.address</td>
+                <td>
+                    <form action="/Employee/UpdateDistributionStatus" method="post">
+                        <input type="hidden" name="did" value="@distribution.did" />
+                        <select name="status" class="form-control">
+                            <option value="collected">Collected</option>
+                            <option value="expired">Expired</option>
+                        </select>
+                        <button type="submit" class="btn btn-success">Update Status</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+

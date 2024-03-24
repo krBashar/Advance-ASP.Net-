@@ -1,0 +1,54 @@
+﻿@using Zero_Hunger.Auth
+@using Zero_Hunger.EF;
+
+@{
+    ViewBag.Title = "New Donation Request";
+    var user = Session["User"] as user;
+    int userId = user.uid;
+}
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-white" style="background-color: #8B4513;">
+                <div class="card-header text-center">
+                    <h4>New Donation Request</h4>
+                </div>
+                <div class="card-body">
+                    <form action="" method="POST">
+                        <input type="hidden" name="uid" value="@userId">
+                        <input type="hidden" name="status" value="pending">
+                        <div class="form-group row">
+                            <label for="quantity" class="col-sm-3 col-form-label text-center">Quantity</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Food Quantity" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="maxtime" class="col-sm-3 col-form-label text-center">Last Time to pickup</label>
+                            <div class="col-sm-9">
+                                <input type="time" class="form-control" id="maxtime" name="maxtime" placeholder="hh:mm:ss" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
+                            <label for="address" class="col-sm-3 col-form-label text-center">Pickup Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Location" required>
+                            </div>
+                        </div>
+                        <br>
+
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger">Place Donation</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

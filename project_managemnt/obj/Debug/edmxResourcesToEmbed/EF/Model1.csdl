@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="project_managementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="member">
+    <Key>
+      <PropertyRef Name="uid" />
+    </Key>
+    <Property Name="uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pid" Type="Int32" Nullable="false" />
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="project" Relationship="Self.FK_members_projects" FromRole="members" ToRole="projects" />
+    <NavigationProperty Name="user" Relationship="Self.FK_members_user" FromRole="members" ToRole="user" />
+  </EntityType>
+  <EntityType Name="project">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="deadline" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="members" Relationship="Self.FK_members_projects" FromRole="projects" ToRole="members" />
+    <NavigationProperty Name="user" Relationship="Self.FK_projects_projects" FromRole="projects" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="members" Relationship="Self.FK_members_user" FromRole="user" ToRole="members" />
+    <NavigationProperty Name="projects" Relationship="Self.FK_projects_projects" FromRole="user" ToRole="projects" />
+  </EntityType>
+  <Association Name="FK_members_projects">
+    <End Role="projects" Type="Self.project" Multiplicity="1" />
+    <End Role="members" Type="Self.member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="members">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_members_user">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="members" Type="Self.member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="members">
+        <PropertyRef Name="mid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_projects_projects">
+    <End Role="user" Type="Self.user" Multiplicity="1" />
+    <End Role="projects" Type="Self.project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="projects">
+        <PropertyRef Name="cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="project_managementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="members" EntityType="Self.member" />
+    <EntitySet Name="projects" EntityType="Self.project" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK_members_projects" Association="Self.FK_members_projects">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="members" EntitySet="members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_members_user" Association="Self.FK_members_user">
+      <End Role="user" EntitySet="users" />
+      <End Role="members" EntitySet="members" />
+    </AssociationSet>
+    <AssociationSet Name="FK_projects_projects" Association="Self.FK_projects_projects">
+      <End Role="user" EntitySet="users" />
+      <End Role="projects" EntitySet="projects" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

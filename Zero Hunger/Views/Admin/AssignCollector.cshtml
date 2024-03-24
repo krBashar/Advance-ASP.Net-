@@ -1,0 +1,43 @@
+﻿@model Zero_Hunger.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "Assign Collector";
+}
+<div class="card-header text-center"><h2>Assign Collector</h2></div>
+<br>
+
+<table class="table">
+    <tr>
+        <th>Donation No</th>
+        <th>Quantity</th>
+        <th>Expired Time</th>
+        <th>Address</th>
+        <th>Collector</th>
+        <th></th>
+    </tr>
+
+    @foreach (var order in Model.Orders.Where(o => !Model.Distributions.Any(d => d.oid == o.oid)).Select((value, index) => new { Value = value, Index = index + 1 }))
+    {
+        <tr>
+            <td>@order.Index</td>
+            <td>@order.Value.quantity</td>
+            <td>@order.Value.maxtime</td>
+            <td>@order.Value.address</td>
+            <td>
+                <div>
+                    <form action="/Admin/UpdateOrderCollector" method="post">
+                        <input type="hidden" name="oid" value="@order.Value.oid" />
+                        <select name="uid" class="form-control">
+                            @foreach (var user in Model.Users.Where(u => u.type == "employee"))
+                            {
+                                <option value="@user.uid">@user.uid</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-success">Assign</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
